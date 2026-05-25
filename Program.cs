@@ -1,48 +1,17 @@
-﻿
-abstract class Account
-{
-    public string OwnerName {get; set;}
-    public decimal Balance {get; set;}
+﻿using Models.CreditAccount;
+using Models.SavingsAccount;
+using Models.Accounts;
 
-    public Account(string ownerName, decimal balance)
-    {
-        this.OwnerName = ownerName;
-        this.Balance = balance;
-    }
+Account savings = new SavingsAccount("Nikita", 1000);
 
-    public abstract void WithDraw(decimal amount);
+savings.ShowBalance();
+savings.Deposit(500);
+savings.WithDraw(300);
+savings.WithDraw(1500);
 
-    public virtual void ShowBalance()
-    {
-        Console.WriteLine($"Balance : {Balance}");
-    }
+Console.WriteLine();
 
-    public void Deposit(decimal amount)
-    {   
-        Balance+=amount;
-        Console.WriteLine($"Umimy balance (balance + deposit) : {Balance}");
-    }
-}
-
-class SavingsAccount : Account 
-{
-    public SavingsAccount(string ownerName, decimal balance) : base(ownerName, balance){}
-    
-    public override void WithDraw(decimal amount)
-    {
-        if (amount > Balance)
-        {
-            Console.WriteLine("Not enough balance");
-        }
-        else
-        {
-            Balance--;
-        };
-    }
-
-    public override void ShowBalance()
-    {
-        base.ShowBalance();
-    }
-}
-
+Account creditCard = new CreditAccount("Ali", 0);
+creditCard.ShowBalance();             
+creditCard.WithDraw(6000);                                 
+creditCard.Deposit(2000);                    
